@@ -11,6 +11,7 @@ import ThemeButton from './components/UI/ThemeButton/ThemeButton';
 import ThemeContext from './context/themeContext';
 import AuthContext from './context/authContext';
 import BestHotel from "./components/BestHotel/BestHotel";
+import InspiringQuote from "./components/InsparingQuote/InspiringQuote";
 
 const backendHotels = [
     {
@@ -38,11 +39,12 @@ function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     const getBestHotel = useCallback(() => {
-        if (!hotels.length){
+        if (!backendHotels.length){
             return null;
         }else {
             return backendHotels.sort((a, b) => b.rating - a.rating)[0];
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [backendHotels]);
 
     const changeTheme = () => {
@@ -67,6 +69,7 @@ function App() {
 
     const header = (
         <Header>
+            <InspiringQuote/>
             <Searchbar
                 onSearch={term => searchHandler(term)} />
             <ThemeButton />

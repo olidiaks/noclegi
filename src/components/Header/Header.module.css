@@ -3,12 +3,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 80px 15px;
+  padding: 100px 15px;
   overflow: hidden;
   position: relative;
 }
 .headerImage {
-  background-color: #cdcdcd;
   background: url(../../assets/images/header.jpg) center;
   background-size: 110%;
   position: absolute;
