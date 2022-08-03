@@ -26,4 +26,5 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - uses: npm run deploy
+    - name: Deply
+      uses: npm run deploy
