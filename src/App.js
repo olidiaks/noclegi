@@ -39,9 +39,9 @@ function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     const getBestHotel = useCallback(() => {
-        if (!backendHotels.length){
+        if (!backendHotels.length) {
             return null;
-        }else {
+        } else {
             return backendHotels.sort((a, b) => b.rating - a.rating)[0];
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -71,20 +71,20 @@ function App() {
         <Header>
             <InspiringQuote/>
             <Searchbar
-                onSearch={term => searchHandler(term)} />
-            <ThemeButton />
+                onSearch={term => searchHandler(term)}/>
+            <ThemeButton/>
         </Header>
     );
     const content = (
         loading
-            ? <LoadingIcon />
+            ? <LoadingIcon/>
             : <>
-                <BestHotel getBestHotel={getBestHotel}/>
-                <Hotels hotels={hotels} />
+                {!getBestHotel() ? <></> : <BestHotel getBestHotel={getBestHotel}/>}
+                <Hotels hotels={hotels}/>
             </>
     );
-    const menu = <Menu />;
-    const footer = <Footer />;
+    const menu = <Menu/>;
+    const footer = <Footer/>;
 
     return (
         <AuthContext.Provider value={{
