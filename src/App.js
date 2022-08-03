@@ -12,6 +12,7 @@ import ThemeContext from './context/themeContext';
 import AuthContext from './context/authContext';
 import BestHotel from "./components/BestHotel/BestHotel";
 import InspiringQuote from "./components/InsparingQuote/InspiringQuote";
+import useStateStorage from "./hooks/useStateStorage";
 
 const backendHotels = [
     {
@@ -33,6 +34,7 @@ const backendHotels = [
 ];
 
 function App() {
+    const [storage, setStorage] = useStateStorage('klucz', 'wartości startowa');
     const [hotels, setHotels] = useState([]);
     const [loading, setLoading] = useState(true);
     const [theme, setTheme] = useState('danger');
@@ -79,6 +81,7 @@ function App() {
         loading
             ? <LoadingIcon/>
             : <>
+                <input type="text" value={storage.toString()} onChange={e => setStorage(e.target.value)}/>
                 {!getBestHotel() ? <></> : <BestHotel getBestHotel={getBestHotel}/>}
                 <Hotels hotels={hotels}/>
             </>
