@@ -27,7 +27,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm i
-    - run: npm run build
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1
     - name: Deploy
