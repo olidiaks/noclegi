@@ -10,7 +10,7 @@ import Footer from './components/Footer/Footer';
 import ThemeButton from './components/UI/ThemeButton/ThemeButton';
 import ThemeContext from './context/themeContext';
 import AuthContext from './context/authContext';
-import BestHotel from "./components/BestHotel/BestHotel";
+import BestHotel from "./components/Hotels/BestHotel/BestHotel";
 import InspiringQuote from "./components/InsparingQuote/InspiringQuote";
 import useStateStorage from "./hooks/useStateStorage";
 
