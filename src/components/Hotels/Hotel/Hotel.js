@@ -4,6 +4,7 @@ import hotelImg from '../../../assets/images/hotel.jpg';
 import ThemeContext from '../../../context/themeContext';
 import {useContext} from 'react';
 import useAuth from "../../../hooks/useAuth";
+import {Link} from "react-router-dom";
 
 
 const propTypes = {
@@ -19,10 +20,8 @@ function Hotel(props) {
 
     const [auth] = useAuth();
 
-    function clickHandler(e) {
-        e.preventDefault();
-        props.onOpen(props);
-    }
+    const clickHandler = () => props.onOpen(props);
+
 
     return (
         <div className={`card ${styles.hotel}`}>
@@ -43,12 +42,13 @@ function Hotel(props) {
                             </div>
                             <div className="col text-right">
                                 <h5>Ocena: {props.rating}</h5>
-                                <a
+                                <Link
+                                    to={`/hotele/${props.id}`}
                                     className={`btn btn-${theme.color} mt-2 px-4`}
                                     onClick={clickHandler}
                                 >
                                     Pokaż
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>

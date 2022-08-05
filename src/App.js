@@ -1,20 +1,17 @@
-import {useCallback, useEffect, useState} from 'react';
+import {useState} from 'react';
 import './App.css';
 import Header from './components/Header/Header';
 import Menu from './components/Menu/Menu';
-import Hotels from './components/Hotels/Hotels';
-import LoadingIcon from './components/UI/LoadingIcon/LoadingIcon';
 import Searchbar from './components/UI/Searchbar/Searchbar';
 import Layout from './components/Layout/Layout';
 import Footer from './components/Footer/Footer';
 import ThemeButton from './components/UI/ThemeButton/ThemeButton';
 import ThemeContext from './context/themeContext';
 import AuthContext from './context/authContext';
-import BestHotel from "./components/Hotels/BestHotel/BestHotel";
 import InspiringQuote from "./components/InsparingQuote/InspiringQuote";
-import LastHotel from "./components/Hotels/LastHotel/LastHotel";
-import useStateStorage from "./hooks/useStateStorage";
-import useWebsiteTitile from "./hooks/useWebsiteTitile";
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import Home from "./pages/Home/Home";
+import Hotel from "./pages/Hotel/Hotel";
 
 const backendHotels = [
     {
@@ -37,21 +34,9 @@ const backendHotels = [
 
 function App() {
     const [hotels, setHotels] = useState([]);
-    const [loading, setLoading] = useState(true);
     const [theme, setTheme] = useState('danger');
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [lastHotel, setLastHotel] = useStateStorage('last-hotel', null);
 
-    useWebsiteTitile("Strona główna | Noclegi");
-
-    const getBestHotel = useCallback(() => {
-        if (!backendHotels.length) {
-            return null;
-        } else {
-            return backendHotels.sort((a, b) => b.rating - a.rating)[0];
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [backendHotels]);
 
     const changeTheme = () => {
         const newTheme = theme === 'primary' ? 'danger' : 'primary';
@@ -64,16 +49,6 @@ function App() {
                 .includes(term.toLowerCase()));
         setHotels(newHotels);
     }
-    const openHotel = hotel => setLastHotel(hotel);
-    const removeLastHotel = () => setLastHotel(null);
-
-
-    useEffect(() => {
-        setTimeout(() => {
-            setHotels(backendHotels);
-            setLoading(false);
-        }, 1000);
-    }, []);
 
 
     const header = (
@@ -86,35 +61,40 @@ function App() {
     );
 
     const content = (
-        loading
-            ? <LoadingIcon/>
-            : <>
-                {lastHotel ? <LastHotel onRemove={removeLastHotel} {...lastHotel}/> : null}
-                {getBestHotel() ? <BestHotel getBestHotel={getBestHotel}/> : null}
-                <Hotels onOpen={openHotel} hotels={hotels}/>
-            </>
+        <Routes>
+            <Route path="/" element={
+                <Home
+                    backendHotels={backendHotels}
+                    hotels={hotels}
+                    setHotels={setHotels}
+                />
+            }/>
+            <Route path="/hotele/:id" element={<Hotel/>}/>
+        </Routes>
     );
     const menu = <Menu/>;
     const footer = <Footer/>;
 
     return (
-        <AuthContext.Provider value={{
-            isAuthenticated: isAuthenticated,
-            login: () => setIsAuthenticated(true),
-            logout: () => setIsAuthenticated(false),
-        }}>
-            <ThemeContext.Provider value={{
-                color: theme,
-                changeTheme: changeTheme
+        <Router>
+            <AuthContext.Provider value={{
+                isAuthenticated: isAuthenticated,
+                login: () => setIsAuthenticated(true),
+                logout: () => setIsAuthenticated(false),
             }}>
-                <Layout
-                    header={header}
-                    menu={menu}
-                    content={content}
-                    footer={footer}
-                />
-            </ThemeContext.Provider>
-        </AuthContext.Provider>
+                <ThemeContext.Provider value={{
+                    color: theme,
+                    changeTheme: changeTheme
+                }}>
+                    <Layout
+                        header={header}
+                        menu={menu}
+                        content={content}
+                        footer={footer}
+                    />
+                </ThemeContext.Provider>
+            </AuthContext.Provider>
+        </Router>
     );
 }
 
