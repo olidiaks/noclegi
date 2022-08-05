@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/noclegi/static/css/main.a9900999.css",
-    "main.js": "/noclegi/static/js/main.7eeeb851.js",
+    "main.js": "/noclegi/static/js/main.6e1f49dc.js",
     "static/js/787.8f695a93.chunk.js": "/noclegi/static/js/787.8f695a93.chunk.js",
     "static/media/header.jpg": "/noclegi/static/media/header.ae20f401724556d4760e.jpg",
     "static/media/hotel.jpg": "/noclegi/static/media/hotel.de898f0d0153330fad7e.jpg",
     "index.html": "/noclegi/index.html",
     "main.a9900999.css.map": "/noclegi/static/css/main.a9900999.css.map",
-    "main.7eeeb851.js.map": "/noclegi/static/js/main.7eeeb851.js.map",
+    "main.6e1f49dc.js.map": "/noclegi/static/js/main.6e1f49dc.js.map",
     "787.8f695a93.chunk.js.map": "/noclegi/static/js/787.8f695a93.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.a9900999.css",
-    "static/js/main.7eeeb851.js"
+    "static/js/main.6e1f49dc.js"
   ]
 }
