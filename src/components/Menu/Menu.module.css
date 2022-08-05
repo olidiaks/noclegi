@@ -1,17 +1,28 @@
 .menu {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  text-align: left;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: left;
 }
+
 .menuItem {
-  display: inline-block;
-  margin-right: 15px;
+    display: inline-block;
+    margin-right: 15px;
 }
+
 .menuItem a {
-  color: #6c757d;
+    color: #6c757d;
 }
+
+.menuItemActive {
+    text-decoration: underline;
+}
+
+.menuItemDisable {
+    text-decoration: none;
+}
+
 .menuContainer {
-  border: 1px solid #cdcdcd;
-  margin: 10px 0;
+    border: 1px solid #cdcdcd;
+    margin: 10px 0;
 }

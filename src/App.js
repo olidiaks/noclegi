@@ -13,6 +13,7 @@ import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Hotel from "./pages/Hotel/Hotel";
 import Search from "./pages/Search/Search";
+import Profile from "./pages/Profile/Profile";
 
 const backendHotels = [
     {
@@ -64,6 +65,7 @@ function App() {
             }/>
             <Route path="/hotele/:id" element={<Hotel backendHotels={backendHotels}/>}/>
             <Route path="/wyszukaj/:term" element={<Search/>}/>
+            <Route path='/profil' element={<Profile/>}/>
         </Routes>
     );
     const menu = <Menu/>;
