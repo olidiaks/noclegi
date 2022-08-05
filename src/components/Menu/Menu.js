@@ -4,7 +4,6 @@ import useAuth from "../../hooks/useAuth";
 
 function Menu() {
     const [auth, setAuth] = useAuth();
-    console.log(auth, setAuth);
     const login = (e) => {
         e.preventDefault();
         setAuth(true);

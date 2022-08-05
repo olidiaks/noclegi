@@ -10,8 +10,9 @@ import Footer from './components/Footer/Footer';
 import ThemeButton from './components/UI/ThemeButton/ThemeButton';
 import ThemeContext from './context/themeContext';
 import AuthContext from './context/authContext';
-import BestHotel from "./components/BestHotel/BestHotel";
+import BestHotel from "./components/Hotels/BestHotel/BestHotel";
 import InspiringQuote from "./components/InsparingQuote/InspiringQuote";
+import LastHotel from "./components/Hotels/LastHotel/LastHotel";
 import useStateStorage from "./hooks/useStateStorage";
 
 const backendHotels = [
@@ -34,11 +35,12 @@ const backendHotels = [
 ];
 
 function App() {
-    const [storage, setStorage] = useStateStorage('klucz', 'wartości startowa');
     const [hotels, setHotels] = useState([]);
     const [loading, setLoading] = useState(true);
     const [theme, setTheme] = useState('danger');
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [lastHotel, setLastHotel] = useStateStorage('last-hotel', null);
+
 
     const getBestHotel = useCallback(() => {
         if (!backendHotels.length) {
@@ -60,6 +62,9 @@ function App() {
                 .includes(term.toLowerCase()));
         setHotels(newHotels);
     }
+    const openHotel = hotel => setLastHotel(hotel);
+    const removeLastHotel = () => setLastHotel(null);
+
 
     useEffect(() => {
         setTimeout(() => {
@@ -77,13 +82,14 @@ function App() {
             <ThemeButton/>
         </Header>
     );
+
     const content = (
         loading
             ? <LoadingIcon/>
             : <>
-                <input type="text" value={storage.toString()} onChange={e => setStorage(e.target.value)}/>
-                {!getBestHotel() ? <></> : <BestHotel getBestHotel={getBestHotel}/>}
-                <Hotels hotels={hotels}/>
+                {lastHotel ? <LastHotel onRemove={removeLastHotel} {...lastHotel}/> : null}
+                {getBestHotel() ? <BestHotel getBestHotel={getBestHotel}/> : null}
+                <Hotels onOpen={openHotel} hotels={hotels}/>
             </>
     );
     const menu = <Menu/>;

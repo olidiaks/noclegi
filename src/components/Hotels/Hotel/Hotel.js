@@ -10,13 +10,19 @@ const propTypes = {
     name: PropTypes.string.isRequired,
     city: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired
+    description: PropTypes.string.isRequired,
+    onOpen: PropTypes.func.isRequired,
 };
 
 function Hotel(props) {
     const theme = useContext(ThemeContext);
 
     const [auth] = useAuth();
+
+    function clickHandler(e) {
+        e.preventDefault();
+        props.onOpen(props);
+    }
 
     return (
         <div className={`card ${styles.hotel}`}>
@@ -37,7 +43,10 @@ function Hotel(props) {
                             </div>
                             <div className="col text-right">
                                 <h5>Ocena: {props.rating}</h5>
-                                <a href="#" className={`btn btn-${theme.color} mt-2 px-4`}>
+                                <a
+                                    className={`btn btn-${theme.color} mt-2 px-4`}
+                                    onClick={clickHandler}
+                                >
                                     Pokaż
                                 </a>
                             </div>

@@ -5,13 +5,16 @@ import {memo} from "react";
 
 const propTypes = {
     hotels: PropTypes.array.isRequired,
+    onOpen: PropTypes.func.isRequired,
 }
 const Hotels = props =>
     <div className={styles.container}>
         <h2 className={styles.title}>Oferty:</h2>
         {props.hotels.map(hotel => (
             <Hotel
-                key={hotel.id} {...hotel} />
+                onOpen={props.onOpen}
+                key={hotel.id} {...hotel}
+            />
         ))}
     </div>;
 
