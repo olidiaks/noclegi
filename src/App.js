@@ -12,6 +12,7 @@ import InspiringQuote from "./components/InsparingQuote/InspiringQuote";
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Hotel from "./pages/Hotel/Hotel";
+import Search from "./pages/Search/Search";
 
 const backendHotels = [
     {
@@ -42,20 +43,12 @@ function App() {
         const newTheme = theme === 'primary' ? 'danger' : 'primary';
         setTheme(newTheme);
     }
-    const searchHandler = term => {
-        const newHotels = [...backendHotels]
-            .filter(x => x.name
-                .toLowerCase()
-                .includes(term.toLowerCase()));
-        setHotels(newHotels);
-    }
 
 
     const header = (
         <Header>
             <InspiringQuote/>
-            <Searchbar
-                onSearch={term => searchHandler(term)}/>
+            <Searchbar/>
             <ThemeButton/>
         </Header>
     );
@@ -70,6 +63,7 @@ function App() {
                 />
             }/>
             <Route path="/hotele/:id" element={<Hotel backendHotels={backendHotels}/>}/>
+            <Route path="/wyszukaj/:term" element={<Search/>}/>
         </Routes>
     );
     const menu = <Menu/>;
