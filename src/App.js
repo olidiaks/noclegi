@@ -14,6 +14,7 @@ import BestHotel from "./components/Hotels/BestHotel/BestHotel";
 import InspiringQuote from "./components/InsparingQuote/InspiringQuote";
 import LastHotel from "./components/Hotels/LastHotel/LastHotel";
 import useStateStorage from "./hooks/useStateStorage";
+import useWebsiteTitile from "./hooks/useWebsiteTitile";
 
 const backendHotels = [
     {
@@ -41,6 +42,7 @@ function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [lastHotel, setLastHotel] = useStateStorage('last-hotel', null);
 
+    useWebsiteTitile("Strona główna | Noclegi");
 
     const getBestHotel = useCallback(() => {
         if (!backendHotels.length) {
