@@ -16,6 +16,7 @@ import Search from "./pages/Search/Search";
 import Profile from "./pages/Profile/Profile";
 import ProfileDetails from "./pages/Profile/ProfileDetails/ProfileDetails";
 import MyHotels from "./pages/Profile/MyHotels/MyHotels";
+import NotFound from "./components/404/404";
 
 const backendHotels = [
     {
@@ -58,6 +59,7 @@ function App() {
 
     const content = (
         <Routes>
+            <Route path="*" element={<NotFound/>}/>
             <Route path="/" element={
                 <Home
                     backendHotels={backendHotels}
