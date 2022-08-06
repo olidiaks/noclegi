@@ -27,7 +27,7 @@ function Menu() {
                         <li className={style.menuItem}>
                             <NavLink
                                 className={({isActive}) => isActive ? style.menuItemActive : style.menuItemDisable}
-                                to='/profil'
+                                to='/profil/szczegoly'
                             >
                                 Mój profil.
                             </NavLink>
