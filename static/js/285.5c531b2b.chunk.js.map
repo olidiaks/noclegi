@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/285.5c531b2b.chunk.js","mappings":"0HAEA,UAFiB,kBAAM,uCAAN,C","sources":["pages/Profile/MyHotels/MyHotels.js"],"sourcesContent":["const MyHotels = () => <p>Moje hotele.</p>;\n\nexport default MyHotels;"],"names":[],"sourceRoot":""}
