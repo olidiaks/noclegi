@@ -1,9 +1,11 @@
 import PropTypes from "prop-types";
+import {Link} from "react-router-dom";
 
 const propTypes = {
     name: PropTypes.string.isRequired,
     city: PropTypes.string.isRequired,
     onRemove: PropTypes.func.isRequired,
+    id: PropTypes.number.isRequired,
 };
 const LastHotel = props =>
     <div className="card bg-light text-black my-2">
@@ -16,7 +18,7 @@ const LastHotel = props =>
                 <span className="no-wrap badge badge-light text-black">{props.city}</span>
             </div>
             <div style={{width: '100px'}} className="ms-auto d-flex justify-content-between">
-                <button className="btn btn-sm btn-dark">Tak!</button>
+                <Link to={`/hotele/${props.id}`} className="btn btn-sm btn-dark">Tak!</Link>
                 <button onClick={props.onRemove} className="btn btn-sm btn-dark">Nie!</button>
             </div>
         </div>

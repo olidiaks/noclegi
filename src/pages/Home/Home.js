@@ -3,9 +3,9 @@ import BestHotel from "../../components/Hotels/BestHotel/BestHotel";
 import Hotels from "../../components/Hotels/Hotels";
 import {useCallback, useEffect, useState} from "react";
 import useStateStorage from "../../hooks/useStateStorage";
-import useWebsiteTitle from "../../hooks/useWebsiteTitile";
 import PropTypes from "prop-types";
 import LoadingIcon from "../../components/UI/LoadingIcon/LoadingIcon";
+import useWebsiteTitle from "../../hooks/useWebsiteTitle";
 
 const propTypes = {
     backendHotels: PropTypes.array.isRequired,

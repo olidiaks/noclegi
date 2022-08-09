@@ -5,6 +5,7 @@ import styles from "../../components/Hotels/Hotel/Hotel.module.css";
 import hotelImg from "../../assets/images/hotel.jpg";
 import AuthContext from "../../context/authContext";
 import LoadingIcon from "../../components/UI/LoadingIcon/LoadingIcon";
+import useWebsiteTitle from "../../hooks/useWebsiteTitle";
 
 const propTypes = {
     backendHotels: PropTypes.array.isRequired,
@@ -15,9 +16,11 @@ const Hotel = props => {
     const {id} = useParams();
     const [hotel, setHotel] = useState({});
     const [loading, setLoading] = useState(true);
+    const setTile = useWebsiteTitle();
 
     const fetchHotel = () => {
         setHotel(...props.backendHotels.filter(hotel => hotel.id == id));
+        setTile(`Hotel - ${hotel.name}`);
         setLoading(false);
     };
 

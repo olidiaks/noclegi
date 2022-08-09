@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import {useEffect, useState} from "react";
 import moment from "moment";
+import {Link} from "react-router-dom";
 
 const propTypes = {
     getBestHotel: PropTypes.func.isRequired,
@@ -35,7 +36,7 @@ const BestHotel = props => {
                         <p className="no-wrap">Ocena: {hotel.rating}</p>
                     </div>
                     <p>Do końca oferty pozostało: {time}</p>
-                    <button className="btn btn-sm btn-light">Pokaż</button>
+                    <Link to={`/hotele/${hotel.id}`} className="btn btn-sm btn-light">Pokaż</Link>
                 </div>
 
             </div>
