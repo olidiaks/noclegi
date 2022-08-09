@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import React, {lazy, Suspense, useState} from 'react';
 import './App.css';
 import Header from './components/Header/Header';
 import Menu from './components/Menu/Menu';
@@ -13,10 +13,14 @@ import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Hotel from "./pages/Hotel/Hotel";
 import Search from "./pages/Search/Search";
-import Profile from "./pages/Profile/Profile";
-import ProfileDetails from "./pages/Profile/ProfileDetails/ProfileDetails";
-import MyHotels from "./pages/Profile/MyHotels/MyHotels";
 import NotFound from "./components/404/404";
+import Login from "./components/Auth/Login/Login";
+import AuthenticatedRoute from "./components/AuthenticatedRoute/AuthenticatedRoute";
+import LoadingIcon from "./components/UI/LoadingIcon/LoadingIcon";
+
+const MyHotels = lazy(() => import("./pages/Profile/MyHotels/MyHotels"));
+const ProfileDetails = lazy(() => import("./pages/Profile/ProfileDetails/ProfileDetails"));
+const Profile = lazy(() => import("./pages/Profile/Profile"));
 
 const backendHotels = [
     {
@@ -58,22 +62,28 @@ function App() {
     );
 
     const content = (
-        <Routes>
-            <Route path="*" element={<NotFound/>}/>
-            <Route path="/" element={
-                <Home
-                    backendHotels={backendHotels}
-                    hotels={hotels}
-                    setHotels={setHotels}
-                />
-            }/>
-            <Route path="/hotele/:id" element={<Hotel backendHotels={backendHotels}/>}/>
-            <Route path="/wyszukaj/:term" element={<Search/>}/>
-            <Route path='/profil/*' element={<Profile/>}>
-                <Route path="szczegoly" element={<ProfileDetails/>}/>
-                <Route path="mojeHotele" element={<MyHotels/>}/>
-            </Route>
-        </Routes>
+        <Suspense fallback={<LoadingIcon/>}>
+            <Routes>
+                <Route path="*" element={<NotFound/>}/>
+                <Route path="/" element={
+                    <Home
+                        backendHotels={backendHotels}
+                        hotels={hotels}
+                        setHotels={setHotels}
+                    />
+                }/>
+                <Route path="/hotele/:id" element={<Hotel backendHotels={backendHotels}/>}/>
+                <Route path="/wyszukaj/:term" element={<Search/>}/>
+
+                <Route path='/profil/*' element={<AuthenticatedRoute path="/profil"/>}>
+                    <Route element={<Profile/>}>
+                        <Route path="szczegoly" element={<ProfileDetails/>}/>
+                        <Route path="mojeHotele" element={<MyHotels/>}/>
+                    </Route>
+                </Route>
+                <Route path="/zaloguj/:path" element={<Login/>}/>
+            </Routes>
+        </Suspense>
     );
     const menu = <Menu/>;
     const footer = <Footer/>;

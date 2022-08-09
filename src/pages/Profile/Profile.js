@@ -4,6 +4,7 @@ const Profile = () => {
     const details = useResolvedPath("szczegoly");
     const myHotels = useResolvedPath("mojeHotele");
 
+
     return (<div className="card">
         <div className="card-header">
             <h2>Mój profil</h2>
