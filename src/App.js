@@ -17,6 +17,7 @@ import NotFound from "./components/404/404";
 import Login from "./components/Auth/Login/Login";
 import AuthenticatedRoute from "./components/AuthenticatedRoute/AuthenticatedRoute";
 import LoadingIcon from "./components/UI/LoadingIcon/LoadingIcon";
+import ErrorBoundary from "./hoc/ErrorBoundary";
 
 const MyHotels = lazy(() => import("./pages/Profile/MyHotels/MyHotels"));
 const ProfileDetails = lazy(() => import("./pages/Profile/ProfileDetails/ProfileDetails"));
@@ -99,12 +100,14 @@ function App() {
                     color: theme,
                     changeTheme: changeTheme
                 }}>
-                    <Layout
-                        header={header}
-                        menu={menu}
-                        content={content}
-                        footer={footer}
-                    />
+                    <ErrorBoundary>
+                        <Layout
+                            header={header}
+                            menu={menu}
+                            content={content}
+                            footer={footer}
+                        />
+                    </ErrorBoundary>
                 </ThemeContext.Provider>
             </AuthContext.Provider>
         </Router>
