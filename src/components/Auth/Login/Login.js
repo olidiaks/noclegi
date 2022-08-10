@@ -1,45 +1,89 @@
-import {Navigate, useParams} from "react-router-dom";
-import {useContext} from "react";
+import {useNavigate, useParams} from "react-router-dom";
+import {useContext, useState} from "react";
 import AuthContext from "../../../context/authContext";
+import LoadingButton from "../../UI/LoadingButton/LoadingButton";
 
 const Login = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const validator = () => true;
+
     const {login} = useContext(AuthContext);
     const {path} = useParams();
-    return <div>
-        <h2>Logowanie</h2>
-        <form>
-            <div className="row">
-                <div className="col-12 col-md-6">
-                    <label htmlFor="email" className="form-label">Email</label>
-                    <input
-                        type="email"
-                        name="email"
-                        id="email"
-                        className="form-control"
-                        autoComplete="new-email"
+    const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
+    const loginHandler = () => {
+        login();
+        switch (path) {
+            case "Dom":
+                navigate("/");
+                break;
+            default:
+                navigate(`/${path}`);
+        }
+    }
+
+    const [valid, setValid] = useState(null);
+    const errorHandler = () => {
+        setValid(false);
+        setPassword('');
+    };
+
+    const submit = e => {
+        e.preventDefault();
+        setLoading(true);
+        setTimeout(() => {
+            validator(e) ? loginHandler() : errorHandler();
+            setLoading(false);
+        }, 500);
+
+    }
+
+    return (
+        <div>
+            <h2>Logowanie:</h2>
+
+            {valid === false ? <div className="alert alert-danger">
+                Niepoprawne dane logowania
+            </div> : null}
+
+            <form onSubmit={submit}>
+                <div className="row">
+                    <div className="col-12 col-md-6">
+                        <label htmlFor="email" className="form-label">Email</label>
+                        <input
+                            type="email"
+                            name="email"
+                            id="email"
+                            value={email}
+                            onChange={e => setEmail(e.target.value)}
+                            className="form-control"
+                            autoComplete="new-email"
+                        />
+                    </div>
+                    <div className="col-12 col-md-6">
+                        <label htmlFor="password" className="form-label">Hasło</label>
+                        <input
+                            type="password"
+                            name="password"
+                            id="password"
+                            value={password}
+                            onChange={e => setPassword(e.target.value)}
+                            className="form-control"
+                            autoComplete="new-password"
+                        />
+                    </div>
+                </div>
+                <div className="col-12">
+                    <LoadingButton
+                        loading={loading}
+                        label="Zaloguj się"
+                        loadingLabel="Sprawdzanie poprawności danych."
                     />
                 </div>
-                <div className="col-12 col-md-6">
-                    <label htmlFor="password" className="form-label">Hasło</label>
-                    <input
-                        type="password"
-                        name="password"
-                        id="password"
-                        className="form-control"
-                        autoComplete="new-password"
-                    />
-                </div>
-            </div>
-            <div className="col-12">
-                <button onClick={() => {
-                    login();
-                    console.log('wykonano')
-                    return <Navigate to={path}/>
-                }} className="btn btn-primary w-100 mt-2">Zapisz
-                </button>
-            </div>
-        </form>
-    </div>;
+            </form>
+        </div>
+    );
 };
 
 

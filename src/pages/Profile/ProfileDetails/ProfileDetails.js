@@ -1,24 +1,99 @@
-const ProfileDetails = () =>
-    <form>
-        <div className="row">
-            <div className="col-12 col-md-6">
-                <label htmlFor="email" className="form-label">Email</label>
-                <input type="email" name="email" id="email" className="form-control"/>
-            </div>
-            <div className="col-12 col-md-6">
-                <label htmlFor="password" className="form-label">Hasło</label>
-                <input
-                    type="password"
-                    name="password"
-                    id="password"
-                    className="form-control"
-                    autoComplete="new-password"
-                />
-            </div>
+import LoadingButton from "../../../components/UI/LoadingButton/LoadingButton";
+import {useEffect, useState} from "react";
+import isEmail from "validator/es/lib/isEmail";
+import isStrongPassword from "validator/es/lib/isStrongPassword";
+
+const ProfileDetails = () => {
+    const [errors, setErrors] = useState({
+        email: true,
+        password: false,
+    });
+
+    const [loading, setLoading] = useState(false);
+
+    const submit = e => {
+        e.preventDefault();
+        setLoading(true);
+        setTimeout(() => {
+            setLoading(false);
+        }, 500);
+
+    };
+
+    const [email, setEmail] = useState('przykładowy@email.pl');
+    useEffect(() => {
+        setErrors({...errors, email: isEmail(email)});
+    }, [email]);
+
+    const [password, setPassword] = useState('');
+    useEffect(() => {
+        setErrors({...errors, "password": isStrongPassword(password)});
+    }, [password]);
+
+    const buttonDisabled = !errors.email || !errors.password
+
+    return (
+        <div>
+            <h2>Logowanie:</h2>
+
+            <form onSubmit={submit}>
+                <div className="row">
+                    <div className="input-group col-12 col-md-6">
+                        <label htmlFor="email" className="form-label">Email</label>
+                        <input
+                            type="email"
+                            name="email"
+                            id="email"
+                            value={email}
+                            onChange={e => setEmail(e.target.value)}
+                            className={`form-control ${errors.email ? 'is-valid' : 'is-invalid'}`}
+                            autoComplete="new-email"
+                        />
+                        <div className="invalid-feedback">
+                            Niepoprawny email.
+                        </div>
+                        <div className="valid-feedback">
+                            Wszystko gra!
+                        </div>
+                    </div>
+
+
+                    <div className="col-12 col-md-6 input-group">
+                        <label htmlFor="password" className="form-label">Hasło</label>
+                        <input
+                            type="password"
+                            name="password"
+                            id="password"
+                            value={password}
+                            onChange={e => setPassword(e.target.value)}
+                            className={`form-control ${errors.password ? 'is-valid' : 'is-invalid'}`}
+                            autoComplete="new-password"
+                        />
+                        <div className="invalid-feedback">
+                            <ul className="text-danger">
+                                <li> Minimum 8 znaków</li>
+                                <li>Conajmniej jedna mała litera</li>
+                                <li>Conajmniej jedna duża litera</li>
+                                <li>Conajmniej jedna cyfra</li>
+                                <li>Conajmniej jeden znak specjalny
+                                </li>
+                            </ul>
+                        </div>
+                        <div className="valid-feedback">
+                            Wszystko gra!
+                        </div>
+                    </div>
+                </div>
+                <div className="col-12">
+                    <LoadingButton disabled={buttonDisabled}
+                                   loading={loading}
+                                   label="Zapisz się"
+                                   loadingLabel="Sprawdzanie poprawności danych."
+                    />
+                </div>
+            </form>
         </div>
-        <div className="col-12">
-            <button className="btn btn-primary w-100 mt-2">Zapisz</button>
-        </div>
-    </form>;
+    );
+};
 
 export default ProfileDetails;
