@@ -16,7 +16,7 @@ const Login = () => {
         login();
         console.log(path);
         switch (path) {
-            case "Dom":
+            case "/Dom":
                 navigate("/");
                 break;
             default:

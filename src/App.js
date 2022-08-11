@@ -78,10 +78,11 @@ function App() {
                 <Route path="/wyszukaj/:term" element={<Search/>}/>
                 <Route
                     path="/profil/mojeHotele/dodaj-nowy-hotel"
-                    element={<AuthenticatedRoute path="/profil/mojeHotele/dodaj-nowy-hotel"/>}
+                    element={<AuthenticatedRoute
+                        path="/profil/mojeHotele/dodaj-nowy-hotel"><AddHotel/></AuthenticatedRoute>}
                 >
-                    <Route element={<AddHotel/>}/>
                 </Route>
+                {/*<Route path="/profil/mojeHotele/dodaj-nowy-hotel" element={<AddHotel/>}/>*/}
                 <Route path='/profil/*' element={<AuthenticatedRoute path="/profil"/>}>
                     <Route element={<Profile/>}>
                         <Route path="szczegoly" element={<ProfileDetails/>}/>

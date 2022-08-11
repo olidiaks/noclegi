@@ -8,7 +8,7 @@ const propTypes = {
 }
 const AuthenticatedRoute = props =>
     useContext(authContext).isAuthenticated ?
-        <Outlet/> :
+        <><Outlet/>{props.children}</> :
         <Navigate to="/zaloguj" replace={true} state={{path: props.path}}/>;
 
 AuthenticatedRoute.propType = propTypes;
