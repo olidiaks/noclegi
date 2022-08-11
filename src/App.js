@@ -19,6 +19,7 @@ import AuthenticatedRoute from "./components/AuthenticatedRoute/AuthenticatedRou
 import LoadingIcon from "./components/UI/LoadingIcon/LoadingIcon";
 import ErrorBoundary from "./hoc/ErrorBoundary";
 
+const AddHotel = lazy(() => import("./pages/Profile/MyHotels/AddHotel/AddHotel"));
 const MyHotels = lazy(() => import("./pages/Profile/MyHotels/MyHotels"));
 const ProfileDetails = lazy(() => import("./pages/Profile/ProfileDetails/ProfileDetails"));
 const Profile = lazy(() => import("./pages/Profile/Profile"));
@@ -75,14 +76,19 @@ function App() {
                 }/>
                 <Route path="/hotele/:id" element={<Hotel backendHotels={backendHotels}/>}/>
                 <Route path="/wyszukaj/:term" element={<Search/>}/>
-
+                <Route
+                    path="/profil/mojeHotele/dodaj-nowy-hotel"
+                    element={<AuthenticatedRoute path="/profil/mojeHotele/dodaj-nowy-hotel"/>}
+                >
+                    <Route element={<AddHotel/>}/>
+                </Route>
                 <Route path='/profil/*' element={<AuthenticatedRoute path="/profil"/>}>
                     <Route element={<Profile/>}>
                         <Route path="szczegoly" element={<ProfileDetails/>}/>
                         <Route path="mojeHotele" element={<MyHotels/>}/>
                     </Route>
                 </Route>
-                <Route path="/zaloguj/:path" element={<Login/>}/>
+                <Route path="/zaloguj" element={<Login/>}/>
             </Routes>
         </Suspense>
     );

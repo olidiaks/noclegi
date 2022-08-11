@@ -6,11 +6,10 @@ import authContext from "../../context/authContext";
 const propTypes = {
     path: PropTypes.string.isRequired,
 }
-
 const AuthenticatedRoute = props =>
     useContext(authContext).isAuthenticated ?
         <Outlet/> :
-        <Navigate to={`/zaloguj${props.path}`}/>;
+        <Navigate to="/zaloguj" replace={true} state={{path: props.path}}/>;
 
 AuthenticatedRoute.propType = propTypes;
 

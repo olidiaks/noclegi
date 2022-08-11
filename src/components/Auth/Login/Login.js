@@ -1,4 +1,4 @@
-import {useNavigate, useParams} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import {useContext, useState} from "react";
 import AuthContext from "../../../context/authContext";
 import LoadingButton from "../../UI/LoadingButton/LoadingButton";
@@ -9,17 +9,18 @@ const Login = () => {
     const validator = () => true;
 
     const {login} = useContext(AuthContext);
-    const {path} = useParams();
+    const path = useLocation().state.path;
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const loginHandler = () => {
         login();
+        console.log(path);
         switch (path) {
             case "Dom":
                 navigate("/");
                 break;
             default:
-                navigate(`/${path}`);
+                navigate(`${path}`);
         }
     }
 

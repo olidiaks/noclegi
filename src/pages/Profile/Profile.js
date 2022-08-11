@@ -18,9 +18,6 @@ const Profile = () => {
                     <li className="nav-item">
                         <Link to={myHotels} className="nav-link">Hotele</Link>
                     </li>
-                    <li className="nav-item">
-                        <Link to="" className="nav-link"> </Link>
-                    </li>
                 </ul>
             </nav>
             <Outlet/>
