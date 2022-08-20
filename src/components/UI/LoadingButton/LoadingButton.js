@@ -5,6 +5,7 @@ const propTypes = {
     label: PropTypes.string.isRequired,
     loadingLabel: PropTypes.string.isRequired,
     className: PropTypes.string,
+
     disabled: PropTypes.bool,
 }
 
