@@ -1,13 +1,18 @@
+import isEmail from "validator/es/lib/isEmail";
+
 const availableRules = {
     required(value) {
         return value ? '' : 'Pole jest wymagane.';
     },
     min(value, rule) {
         return value.length >= rule.length ? '' : `Minimalna ilość znaków to: ${rule.length}.`
+    },
+    email(value) {
+        return isEmail(value) ? '' : 'Email jest nie poprawny.';
     }
 };
 
-export function AddHotelValidate(rules = [], value) {
+export function Validation(rules = [], value) {
     let error = {
         isValid: true,
         error: '',

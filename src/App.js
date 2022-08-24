@@ -13,11 +13,12 @@ import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Hotel from "./pages/Hotel/Hotel";
 import Search from "./pages/Search/Search";
-import NotFound from "./components/404/404";
 import Login from "./components/Auth/Login/Login";
 import AuthenticatedRoute from "./components/AuthenticatedRoute/AuthenticatedRoute";
 import LoadingIcon from "./components/UI/LoadingIcon/LoadingIcon";
 import ErrorBoundary from "./hoc/ErrorBoundary";
+import Register from "./components/Auth/Register/Register";
+import NotFound from "./components/404/404";
 
 const AddHotel = lazy(() => import("./pages/Profile/MyHotels/AddHotel/AddHotel"));
 const MyHotels = lazy(() => import("./pages/Profile/MyHotels/MyHotels"));
@@ -90,6 +91,7 @@ function App() {
                     </Route>
                 </Route>
                 <Route path="/zaloguj" element={<Login/>}/>
+                <Route path="/rejestracja" element={<Register/>}/>
             </Routes>
         </Suspense>
     );

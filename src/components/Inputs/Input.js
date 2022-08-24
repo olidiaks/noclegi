@@ -30,9 +30,11 @@ const defaultProps = {
 
 
 const Input = props => {
-    let i = 0;
     switch (props.type) {
-        case "text" || "number":
+        case "text":
+        case "number":
+        case "email":
+        case "password":
             return <InputTextNumber {...props}/>;
         case "textarea":
             return <InputTextarea {...props}/>;
@@ -44,6 +46,8 @@ const Input = props => {
             return <InputFile {...props}/>;
         case "radio":
             return <InputRadio {...props}/>;
+        default:
+            return <div className="alert alert-danger">Nie przewidziano takiego typu input.</div>
     }
 
 };

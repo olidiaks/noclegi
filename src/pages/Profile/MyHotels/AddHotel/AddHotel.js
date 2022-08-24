@@ -2,7 +2,7 @@ import {useContext, useEffect, useRef, useState} from "react";
 import LoadingButton from "../../../../components/UI/LoadingButton/LoadingButton";
 import themeContext from "../../../../context/themeContext";
 import Input from "../../../../components/Inputs/Input";
-import {AddHotelValidate} from "../../../../helpers/validation/addHoteValidation/addHotelValidate";
+import {Validation} from "../../../../helpers/Validation/Validation";
 
 const AddHotel = () => {
     const theme = useContext(themeContext).color;
@@ -65,7 +65,7 @@ const AddHotel = () => {
                 ...state,
                 value: value,
                 showError: true,
-                ...AddHotelValidate(state.rules, value),
+                ...Validation(state.rules, value),
             }
         );
     };
