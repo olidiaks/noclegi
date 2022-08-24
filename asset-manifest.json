@@ -1,25 +1,25 @@
 {
   "files": {
     "main.css": "/noclegi/static/css/main.c4bcb7b8.css",
-    "main.js": "/noclegi/static/js/main.f3a94f57.js",
-    "static/js/963.62fbe8b1.chunk.js": "/noclegi/static/js/963.62fbe8b1.chunk.js",
+    "main.js": "/noclegi/static/js/main.fffc81fe.js",
+    "static/js/974.172828f8.chunk.js": "/noclegi/static/js/974.172828f8.chunk.js",
     "static/js/285.265789c3.chunk.js": "/noclegi/static/js/285.265789c3.chunk.js",
-    "static/js/612.fd0fc80d.chunk.js": "/noclegi/static/js/612.fd0fc80d.chunk.js",
+    "static/js/123.2c8eaec4.chunk.js": "/noclegi/static/js/123.2c8eaec4.chunk.js",
     "static/js/828.15a912bd.chunk.js": "/noclegi/static/js/828.15a912bd.chunk.js",
     "static/js/787.8f695a93.chunk.js": "/noclegi/static/js/787.8f695a93.chunk.js",
     "static/media/header.jpg": "/noclegi/static/media/header.ae20f401724556d4760e.jpg",
     "static/media/hotel.jpg": "/noclegi/static/media/hotel.de898f0d0153330fad7e.jpg",
     "index.html": "/noclegi/index.html",
     "main.c4bcb7b8.css.map": "/noclegi/static/css/main.c4bcb7b8.css.map",
-    "main.f3a94f57.js.map": "/noclegi/static/js/main.f3a94f57.js.map",
-    "963.62fbe8b1.chunk.js.map": "/noclegi/static/js/963.62fbe8b1.chunk.js.map",
+    "main.fffc81fe.js.map": "/noclegi/static/js/main.fffc81fe.js.map",
+    "974.172828f8.chunk.js.map": "/noclegi/static/js/974.172828f8.chunk.js.map",
     "285.265789c3.chunk.js.map": "/noclegi/static/js/285.265789c3.chunk.js.map",
-    "612.fd0fc80d.chunk.js.map": "/noclegi/static/js/612.fd0fc80d.chunk.js.map",
+    "123.2c8eaec4.chunk.js.map": "/noclegi/static/js/123.2c8eaec4.chunk.js.map",
     "828.15a912bd.chunk.js.map": "/noclegi/static/js/828.15a912bd.chunk.js.map",
     "787.8f695a93.chunk.js.map": "/noclegi/static/js/787.8f695a93.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.c4bcb7b8.css",
-    "static/js/main.f3a94f57.js"
+    "static/js/main.fffc81fe.js"
   ]
 }
