@@ -1,8 +1,12 @@
-import {useContext, useEffect, useRef, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import LoadingButton from "../../../../components/UI/LoadingButton/LoadingButton";
 import themeContext from "../../../../context/themeContext";
-import Input from "../../../../components/Inputs/Input";
-import {Validation} from "../../../../helpers/Validation/Validation";
+import Input from "../../../../components/forms/Inputs/Input";
+import {inputChangeHandler} from "../../../../components/forms/Inputs/InputHelpers/inputChangeHandler";
+import {
+    checkValidationForTrackedInputs
+} from "../../../../components/forms/Inputs/InputHelpers/checkValidationForTrackedInputs";
+
 
 const AddHotel = () => {
     const theme = useContext(themeContext).color;
@@ -23,7 +27,6 @@ const AddHotel = () => {
     });
     const [status, setStatus] = useState({value: 'Aktywny', error: '', showError: false, rules: ['required']});
 
-    const imageRef = useRef();
     const [image, setImage] = useState({value: null, error: '', showError: false, rules: []});
 
     const [features, setFeatures] = useState({value: [], error: '', showError: false, rules: []});
@@ -32,23 +35,10 @@ const AddHotel = () => {
     const [addSuccess, setAddSuccess] = useState(false);
 
     const [isEverythingValid, setIsEverythingValid] = useState(false);
-    const checkValidationForAllInputs = () => {
-        const variables = [city, description, name];
-
-        for (const variable of variables) {
-            if (variable instanceof Object) {
-                if (!variable.showError || !variable.isValid) {
-                    setIsEverythingValid(false);
-                    return null;
-                }
-            }
-        }
-        setIsEverythingValid(true);
-    }
-
+    const trackValues = [city, description, name]
     useEffect(() => {
-        checkValidationForAllInputs();
-    }, [city, description, name]);
+        setIsEverythingValid(checkValidationForTrackedInputs(trackValues));
+    }, trackValues);
 
     const submit = event => {
         event.preventDefault();
@@ -60,15 +50,6 @@ const AddHotel = () => {
         }, 500);
     }
 
-    const onChangeHandler = (value, state, setState) => {
-        setState({
-                ...state,
-                value: value,
-                showError: true,
-                ...Validation(state.rules, value),
-            }
-        );
-    };
 
     return <>
         {addSuccess ? <div className="alert alert-success">
@@ -84,7 +65,7 @@ const AddHotel = () => {
                     <Input
                         description="Nazwa"
                         value={name.value}
-                        onChange={value => onChangeHandler(value, name, setName)}
+                        onChange={value => inputChangeHandler(value, name, setName)}
                         type="text"
                         isValid={name.isValid}
                         showError={name.showError}
@@ -94,7 +75,7 @@ const AddHotel = () => {
                     <Input
                         description="Miejscowość"
                         value={city.value}
-                        onChange={value => onChangeHandler(value, city, setCity)}
+                        onChange={value => inputChangeHandler(value, city, setCity)}
                         type="text"
                         isValid={city.isValid}
                         showError={city.showError}
@@ -104,7 +85,7 @@ const AddHotel = () => {
                     <Input
                         description="Opis"
                         value={description.value}
-                        onChange={value => onChangeHandler(value, description, setDescription)}
+                        onChange={value => inputChangeHandler(value, description, setDescription)}
                         type="textarea"
                         isValid={description.isValid}
                         showError={description.showError}
@@ -114,7 +95,7 @@ const AddHotel = () => {
                     <Input
                         description="Pokoje"
                         value={rooms.value}
-                        onChange={value => onChangeHandler(value, rooms, setRooms)}
+                        onChange={value => inputChangeHandler(value, rooms, setRooms)}
                         type="select"
                         option={[
                             {value: 1, label: 1},
@@ -131,7 +112,7 @@ const AddHotel = () => {
 
                     <Input
                         description="udogodnienia"
-                        onChange={value => onChangeHandler(value, features, setFeatures)}
+                        onChange={value => inputChangeHandler(value, features, setFeatures)}
                         type="checkbox"
                         value={features.value}
                         option={[
@@ -147,7 +128,7 @@ const AddHotel = () => {
                     <Input
                         type="radio"
                         value={status.value}
-                        onChange={value => onChangeHandler(value, status, setStatus)}
+                        onChange={value => inputChangeHandler(value, status, setStatus)}
                         description="Status"
                         name="active"
                         option={[

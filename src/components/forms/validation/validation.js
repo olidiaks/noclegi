@@ -12,7 +12,7 @@ const availableRules = {
     }
 };
 
-export function Validation(rules = [], value) {
+export function validation(rules = [], value) {
     let error = {
         isValid: true,
         error: '',

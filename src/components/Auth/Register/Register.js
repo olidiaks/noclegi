@@ -1,8 +1,10 @@
-import Input from "../../Inputs/Input";
+import Input from "../../forms/Inputs/Input";
 import LoadingButton from "../../UI/LoadingButton/LoadingButton";
 import {useContext, useEffect, useState} from "react";
-import {Validation} from "../../../helpers/Validation/Validation";
 import ThemeContext from "../../../context/themeContext";
+import {checkValidationForTrackedInputs} from "../../forms/Inputs/InputHelpers/checkValidationForTrackedInputs";
+import {inputChangeHandler} from "../../forms/Inputs/InputHelpers/inputChangeHandler";
+import {onSubmitHandler} from "../../forms/formHelpes/onSubmitHandler";
 
 export default function Register() {
     const theme = useContext(ThemeContext).color;
@@ -21,47 +23,14 @@ export default function Register() {
         rules: ['required', {rule: "min", length: 8}],
     });
     const [loading, setLoading] = useState(false);
-    const [successRegister, setSuccessRegister] = useState(false);
-
-    const submit = event => {
-        event.preventDefault();
-        setLoading(true);
-        setTimeout(() => {
-            setLoading(false);
-            setSuccessRegister(true);
-            setTimeout(() => setSuccessRegister(false), 3000);
-        }, 500);
-    }
-
-    const onChangeHandler = (value, state, setState) => {
-        setState({
-                ...state,
-                value: value,
-                showError: true,
-                ...Validation(state.rules, value),
-            }
-        );
-    };
+    const [successRegister, setSuccess] = useState(false);
 
     const [isEverythingValid, setIsEverythingValid] = useState(false);
 
-    const checkValidationForAllInputs = () => {
-        const variables = [email, password];
-
-        for (const variable of variables) {
-            if (variable instanceof Object) {
-                if (!variable.showError || !variable.isValid) {
-                    setIsEverythingValid(false);
-                    return null;
-                }
-            }
-        }
-        setIsEverythingValid(true);
-    }
-
+    const inputsToValidate = [email, password]
     useEffect(() => {
-        checkValidationForAllInputs();
-    }, [email, password]);
+        setIsEverythingValid(checkValidationForTrackedInputs(inputsToValidate));
+    }, inputsToValidate);
 
     return (<>
             {successRegister ? <div className="alert alert-success">
@@ -72,12 +41,12 @@ export default function Register() {
                     Rejestracja
                 </div>
                 <div className="card-body">
-                    <form onSubmit={submit}>
+                    <form onSubmit={event => onSubmitHandler(event, setLoading, setSuccess)}>
 
                         <Input
                             description="Email"
                             value={email.value}
-                            onChange={value => onChangeHandler(value, email, setEmail)}
+                            onChange={value => inputChangeHandler(value, email, setEmail)}
                             type="text"
                             isValid={email.isValid}
                             showError={email.showError}
@@ -87,7 +56,7 @@ export default function Register() {
                         <Input
                             description="Hasło"
                             value={password.value}
-                            onChange={value => onChangeHandler(value, password, setPassword)}
+                            onChange={value => inputChangeHandler(value, password, setPassword)}
                             type="password"
                             isValid={password.isValid}
                             showError={password.showError}
