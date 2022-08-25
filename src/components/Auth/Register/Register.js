@@ -5,6 +5,10 @@ import ThemeContext from "../../../context/themeContext";
 import {checkValidationForTrackedInputs} from "../../forms/Inputs/InputHelpers/checkValidationForTrackedInputs";
 import {inputChangeHandler} from "../../forms/Inputs/InputHelpers/inputChangeHandler";
 import {onSubmitHandler} from "../../forms/formHelpes/onSubmitHandler";
+import axios from "axios";
+import useAuth from "../../../hooks/useAuth";
+import {useNavigate} from "react-router-dom";
+import {firebaseErrorsHandler} from "../../../hooks/Firebase/firebaseErrorsHandler";
 
 export default function Register() {
     const theme = useContext(ThemeContext).color;
@@ -26,11 +30,40 @@ export default function Register() {
     const [successRegister, setSuccess] = useState(false);
 
     const [isEverythingValid, setIsEverythingValid] = useState(false);
-
-    const inputsToValidate = [email, password]
+    const inputsToValidate = [email, password];
     useEffect(() => {
         setIsEverythingValid(checkValidationForTrackedInputs(inputsToValidate));
     }, inputsToValidate);
+
+    const [auth, setAuth] = useAuth();
+    const navigate = useNavigate();
+    useEffect(() => {
+        if (auth) {
+            navigate('/', {replace: true});
+        }
+    }, [auth]);
+
+    const submit = async event => {
+        onSubmitHandler(event, setLoading, setSuccess);
+        try {
+            const response = await axios.post("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAiyIunKuby59uyS9k2Q3vlUFHLNYDeqfQ", {
+                email: email.value,
+                password: password.value,
+                returnSecureToken: true,
+            });
+            console.log(response);
+
+            setAuth(true, response.data);
+
+            navigate('/', {replace: false})
+        } catch (e) {
+            console.log(e);
+            setError(firebaseErrorsHandler(e.response));
+        }
+
+    };
+
+    const [error, setError] = useState('');
 
     return (<>
             {successRegister ? <div className="alert alert-success">
@@ -41,7 +74,7 @@ export default function Register() {
                     Rejestracja
                 </div>
                 <div className="card-body">
-                    <form onSubmit={event => onSubmitHandler(event, setLoading, setSuccess)}>
+                    <form onSubmit={submit}>
 
                         <Input
                             description="Email"
@@ -62,6 +95,8 @@ export default function Register() {
                             showError={password.showError}
                             invalidFeedback={password.error}
                         />
+
+                        {error ? <div className="alert alert-danger">{error}</div> : null}
 
                         <LoadingButton
                             loading={loading}
