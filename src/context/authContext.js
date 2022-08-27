@@ -1,9 +1,11 @@
 import React from 'react';
 
 const AuthContext = React.createContext({
-  isAuthenticated: false,
-  login: () => {},
-  logout: () => {},
+    user: JSON.parse(window.localStorage.getItem('token-data')),
+    login: () => {
+    },
+    logout: () => {
+    },
 });
 
 AuthContext.displayName = 'AuthContext';

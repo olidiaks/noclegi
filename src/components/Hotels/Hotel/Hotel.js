@@ -4,7 +4,8 @@ import hotelImg from '../../../assets/images/hotel.jpg';
 import ThemeContext from '../../../context/themeContext';
 import {useContext} from 'react';
 import useAuth from "../../../hooks/useAuth";
-import {generatePath, Link, useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import {LoginButton} from "../../UI/LoginButton/LoginButton";
 
 
 const propTypes = {
@@ -22,7 +23,6 @@ function Hotel(props) {
 
     const clickHandler = () => props.onOpen(props);
 
-    const path = generatePath("/zaloguj/:path", {path: "Dom"});
     const navigate = useNavigate();
 
 
@@ -61,13 +61,7 @@ function Hotel(props) {
                             {props.description}
                         </p>
                         {auth ? <p className="mt-2">Dostępność 4 pokoje.</p> :
-                            <button
-                                type="button"
-                                onClick={() => navigate(path)}
-                                className="mt-2 btn btn-primary"
-                            >
-                                Dostępność: zaloguj się.
-                            </button>
+                            <LoginButton>Dostępność: zaloguj się.</LoginButton>
                         }
                     </div>
                 </div>

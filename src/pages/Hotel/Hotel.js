@@ -6,13 +6,14 @@ import hotelImg from "../../assets/images/hotel.jpg";
 import AuthContext from "../../context/authContext";
 import LoadingIcon from "../../components/UI/LoadingIcon/LoadingIcon";
 import useWebsiteTitle from "../../hooks/useWebsiteTitle";
+import {LoginButton} from "../../components/UI/LoginButton/LoginButton";
 
 const propTypes = {
     backendHotels: PropTypes.array.isRequired,
 };
 
 const Hotel = props => {
-    const auth = useContext(AuthContext);
+    const auth = useContext(AuthContext).user;
     const {id} = useParams();
     const [hotel, setHotel] = useState({});
     const [loading, setLoading] = useState(true);
@@ -57,8 +58,7 @@ const Hotel = props => {
                             {hotel.description}
                         </p>
                         {auth ? <p className="mt-2">Dostępne 4 pokoje.</p> :
-                            <p className="mt-2">Dostępność: zaloguj się.</p>}
-
+                            <LoginButton>Dostępność: zaloguj się.</LoginButton>}
                     </div>
                 </div>
 

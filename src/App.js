@@ -47,7 +47,7 @@ const backendHotels = [
 function App() {
     const [hotels, setHotels] = useState([]);
     const [theme, setTheme] = useState('danger');
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [user, setUser] = useState(JSON.parse(window.localStorage.getItem('token-data')));
 
     const changeTheme = () => {
         const newTheme = theme === 'primary' ? 'danger' : 'primary';
@@ -81,7 +81,6 @@ function App() {
                         path="/profil/mojeHotele/dodaj-nowy-hotel"><AddHotel/></AuthenticatedRoute>}
                 >
                 </Route>
-                {/*<Route path="/profil/mojeHotele/dodaj-nowy-hotel" element={<AddHotel/>}/>*/}
                 <Route path='/profil/*' element={<AuthenticatedRoute path="/profil"/>}>
                     <Route element={<Profile/>}>
                         <Route path="szczegoly" element={<ProfileDetails/>}/>
@@ -99,9 +98,12 @@ function App() {
     return (
         <Router>
             <AuthContext.Provider value={{
-                isAuthenticated: isAuthenticated,
-                login: () => setIsAuthenticated(true),
-                logout: () => setIsAuthenticated(false),
+                user: user,
+                login: () => setUser(JSON.parse(window.localStorage.getItem('token-data'))),
+                logout: () => {
+                    setUser(null);
+                    window.localStorage.removeItem('token-data')
+                },
             }}>
                 <ThemeContext.Provider value={{
                     color: theme,
