@@ -4,11 +4,11 @@ import {useContext, useEffect, useState} from "react";
 import ThemeContext from "../../../context/themeContext";
 import {checkValidationForTrackedInputs} from "../../forms/Inputs/InputHelpers/checkValidationForTrackedInputs";
 import {inputChangeHandler} from "../../forms/Inputs/InputHelpers/inputChangeHandler";
-import {onSubmitHandler} from "../../forms/formHelpes/onSubmitHandler";
-import axios from "axios";
 import useAuth from "../../../hooks/useAuth";
 import {useNavigate} from "react-router-dom";
+import {submit} from "../helpers/submit";
 import {firebaseErrorsHandler} from "../../../hooks/Firebase/firebaseErrorsHandler";
+import authContext from "../../../context/authContext";
 
 export default function Register() {
     const theme = useContext(ThemeContext).color;
@@ -26,6 +26,7 @@ export default function Register() {
         showError: false,
         rules: ['required', {rule: "min", length: 8}],
     });
+
     const [loading, setLoading] = useState(false);
     const [successRegister, setSuccess] = useState(false);
 
@@ -43,25 +44,12 @@ export default function Register() {
         }
     }, [auth]);
 
-    const submit = async event => {
-        onSubmitHandler(event, setLoading, setSuccess);
-        try {
-            const response = await axios.post("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAiyIunKuby59uyS9k2Q3vlUFHLNYDeqfQ", {
-                email: email.value,
-                password: password.value,
-                returnSecureToken: true,
-            });
-            console.log(response);
+    const errorHandler = response => setError(firebaseErrorsHandler(response));
 
-            setAuth(true, response.data);
+    const {login} = useContext(authContext);
 
-            navigate('/', {replace: false})
-        } catch (e) {
-            console.log(e);
-            setError(firebaseErrorsHandler(e.response));
-        }
-
-    };
+    const submitHandler = event =>
+        submit(event, setLoading, email.value, password.value, '/', navigate, errorHandler, login, false);
 
     const [error, setError] = useState('');
 
@@ -74,7 +62,7 @@ export default function Register() {
                     Rejestracja
                 </div>
                 <div className="card-body">
-                    <form onSubmit={submit}>
+                    <form onSubmit={submitHandler}>
 
                         <Input
                             description="Email"
@@ -110,4 +98,4 @@ export default function Register() {
             </div>
         </>
     );
-}
+};

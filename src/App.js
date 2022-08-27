@@ -49,12 +49,10 @@ function App() {
     const [theme, setTheme] = useState('danger');
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-
     const changeTheme = () => {
         const newTheme = theme === 'primary' ? 'danger' : 'primary';
         setTheme(newTheme);
     }
-
 
     const header = (
         <Header>

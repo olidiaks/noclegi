@@ -2,6 +2,8 @@ import {useLocation, useNavigate} from "react-router-dom";
 import {useContext, useState} from "react";
 import AuthContext from "../../../context/authContext";
 import LoadingButton from "../../UI/LoadingButton/LoadingButton";
+import {firebaseErrorsHandler} from "../../../hooks/Firebase/firebaseErrorsHandler";
+import {submit} from "../helpers/submit";
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -12,43 +14,28 @@ const Login = () => {
     const path = useLocation().state.path;
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
-    const loginHandler = () => {
-        login();
-        console.log(path);
-        switch (path) {
-            case "/Dom":
-                navigate("/");
-                break;
-            default:
-                navigate(`${path}`);
-        }
-    }
+
 
     const [valid, setValid] = useState(null);
-    const errorHandler = () => {
+    const [error, setError] = useState('');
+    const errorHandler = (response) => {
         setValid(false);
         setPassword('');
+        setError(firebaseErrorsHandler(response))
     };
 
-    const submit = e => {
-        e.preventDefault();
-        setLoading(true);
-        setTimeout(() => {
-            validator(e) ? loginHandler() : errorHandler();
-            setLoading(false);
-        }, 500);
-
-    }
+    const submitHandler = e =>
+        submit(e, setLoading, email, password, path, navigate, errorHandler, login, true);
 
     return (
         <div>
             <h2>Logowanie:</h2>
 
             {valid === false ? <div className="alert alert-danger">
-                Niepoprawne dane logowania
+                {error}
             </div> : null}
 
-            <form onSubmit={submit}>
+            <form onSubmit={submitHandler}>
                 <div className="row">
                     <div className="col-12 col-md-6">
                         <label htmlFor="email" className="form-label">Email</label>

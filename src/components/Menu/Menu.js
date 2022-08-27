@@ -1,18 +1,17 @@
 import React from 'react';
 import style from './Menu.module.css';
 import useAuth from "../../hooks/useAuth";
-import {NavLink} from "react-router-dom";
+import {NavLink, useLocation} from "react-router-dom";
 
 function Menu() {
     const [auth, setAuth] = useAuth();
-    const login = (e) => {
-        e.preventDefault();
-        setAuth(true);
-    }
+
     const logout = (e) => {
         e.preventDefault();
         setAuth(false);
     }
+
+    const actualPath = useLocation().pathname;
 
     return (
         <div className={`${style.menuContainer} breadcrumb`}>
@@ -47,7 +46,14 @@ function Menu() {
                             </NavLink>
                         </li>
                         <li className={style.menuItem}>
-                            <a href="#" onClick={login}>Zaloguj</a>
+                            <NavLink
+                                className={({isActive}) => isActive ? style.menuItemActive : style.menuItemDisable}
+                                to="/zaloguj"
+                                replace={true}
+                                state={{path: actualPath}}
+                            >
+                                Zaloguj
+                            </NavLink>
                         </li>
                     </>
                 )
