@@ -4,7 +4,7 @@ import hotelImg from '../../../assets/images/hotel.jpg';
 import ThemeContext from '../../../context/themeContext';
 import {useContext} from 'react';
 import useAuth from "../../../hooks/useAuth";
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {LoginButton} from "../../UI/LoginButton/LoginButton";
 
 
@@ -13,7 +13,7 @@ const propTypes = {
     city: PropTypes.string.isRequired,
     rating: PropTypes.number,
     description: PropTypes.string.isRequired,
-    onOpen: PropTypes.func.isRequired,
+    onOpen: PropTypes.func,
 };
 
 function Hotel(props) {
@@ -22,8 +22,6 @@ function Hotel(props) {
     const [auth] = useAuth();
 
     const clickHandler = () => props.onOpen(props);
-
-    const navigate = useNavigate();
 
 
     return (

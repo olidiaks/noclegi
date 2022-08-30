@@ -5,7 +5,7 @@ import {memo} from "react";
 
 const propTypes = {
     hotels: PropTypes.array.isRequired,
-    onOpen: PropTypes.func.isRequired,
+    onOpen: PropTypes.func,
 }
 const Hotels = props =>
     <div className={styles.container}>

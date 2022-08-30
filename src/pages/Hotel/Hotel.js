@@ -7,6 +7,7 @@ import AuthContext from "../../context/authContext";
 import LoadingIcon from "../../components/UI/LoadingIcon/LoadingIcon";
 import useWebsiteTitle from "../../hooks/useWebsiteTitle";
 import {LoginButton} from "../../components/UI/LoginButton/LoginButton";
+import {firebaseFetchHotels} from "../../hooks/Firebase/firebaseFetchHotels";
 
 const propTypes = {
     backendHotels: PropTypes.array.isRequired,
@@ -19,14 +20,14 @@ const Hotel = props => {
     const [loading, setLoading] = useState(true);
     const setTile = useWebsiteTitle();
 
-    const fetchHotel = () => {
-        setHotel(...props.backendHotels.filter(hotel => hotel.id == id));
-        setTile(`Hotel - ${hotel.name}`);
+    const fetchHotel = async () => {
+        setHotel(await firebaseFetchHotels(id));
+        setTile(`Hotel - ${hotel.name} | Noclegi`);
         setLoading(false);
     };
 
     useEffect(() => {
-        setTimeout(() => fetchHotel(), 500)
+        fetchHotel()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -48,7 +49,7 @@ const Hotel = props => {
                                 <span className="badge badge-light text-black">{hotel.city}</span>
                             </div>
                             <div className="col text-end">
-                                <h5>Ocena: {hotel.rating}</h5>
+                                <h5>Ocena: {hotel.rating ?? 0}</h5>
                             </div>
                         </div>
                     </div>

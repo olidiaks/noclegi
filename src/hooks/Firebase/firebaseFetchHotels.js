@@ -1,11 +1,12 @@
 import instance from "../../axios";
 import {objectToArrayWithId} from "../../helpers/objectToArrayWithId";
 
-export const firebaseFetchHotels = async () => {
+export const firebaseFetchHotels = async (id = null) => {
     try {
-        const res = await instance.get('/hotels.json');
-        return objectToArrayWithId(res.data);
+        const res = await instance.get(`/hotels${id ? `/${id}` : ''}.json`);
+        return id ? res.data : objectToArrayWithId(res.data);
     } catch (e) {
-        throw Error(e);
+        console.log(e.response);
+        throw Error(e.response);
     }
 };
