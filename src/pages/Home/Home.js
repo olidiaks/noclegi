@@ -31,7 +31,6 @@ const Home = props => {
 
     async function fetchHotels() {
         setHotels((await firebaseFetchHotels()).filter(hotel => hotel.status === "Aktywny"));
-        console.log(hotels);
         setLoading(false);
     }
 

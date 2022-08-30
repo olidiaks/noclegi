@@ -12,7 +12,7 @@ const MyHotels = () => {
     const [auth] = useAuth();
     const [hotels, setHotels] = useState([]);
     const fetchHotel = async () => {
-        setHotels((await firebaseFetchHotels()).filter(hotel => hotel.userId == auth.userId));
+        setHotels((await firebaseFetchHotels()).filter(hotel => hotel.idUser == auth.userId));
     }
     useEffect(() => {
         fetchHotel();

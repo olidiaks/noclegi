@@ -4,7 +4,7 @@ export const loginHandler = (response, path, navigate, login) => {
     localStorage.setItem('token-data', JSON.stringify({
         email: data.email,
         token: data.idToken,
-        userId: data.idUser,
+        userId: data.localId,
     }));
     login();
     switch (path) {
