@@ -3,6 +3,7 @@ import useWebsiteTitle from "../../../hooks/useWebsiteTitle";
 import {useEffect, useState} from "react";
 import {firebaseFetchHotels} from "../../../hooks/Firebase/firebaseFetchHotels";
 import useAuth from "../../../hooks/useAuth";
+import instance from "../../../axios";
 
 const MyHotels = () => {
     useWebsiteTitle("Moje hotele. | Noclegi");
@@ -17,6 +18,16 @@ const MyHotels = () => {
     useEffect(() => {
         fetchHotel();
     }, [])
+
+    async function deleteHandler(id) {
+        try {
+            await instance.delete(`/hotels/${id}.json`);
+            setHotels(hotels.filter(hotel => hotel.id !== id));
+        } catch (e) {
+            console.log(e.response);
+            throw Error(e.response);
+        }
+    }
 
     return <div>
         {hotels ? (
@@ -34,7 +45,8 @@ const MyHotels = () => {
                             <td>{hotel.name}</td>
                             <td>
                                 <button className="btn btn-warning">Edytuj</button>
-                                <button className="ms-2 btn btn-danger">Usuń</button>
+                                <button onClick={() => deleteHandler(hotel.id)} className="ms-2 btn btn-danger">Usuń
+                                </button>
                             </td>
                         </tr>)
                 }
