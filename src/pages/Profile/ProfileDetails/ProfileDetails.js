@@ -4,6 +4,7 @@ import isEmail from "validator/es/lib/isEmail";
 import isStrongPassword from "validator/es/lib/isStrongPassword";
 import useAuth from "../../../hooks/useAuth";
 import {authenticationInstance} from "../../../axios";
+import {firebaseErrorsHandler} from "../../../hooks/Firebase/firebaseErrorsHandler";
 
 const ProfileDetails = () => {
     const [errors, setErrors] = useState({
@@ -11,6 +12,8 @@ const ProfileDetails = () => {
         password: false,
     });
 
+    const [changeDateSuccess, setChangeDateSuccess] = useState(false);
+    const [changeDateErrors, setChangeDateErrors] = useState(null);
     const [loading, setLoading] = useState(false);
     const [auth, setAuth] = useAuth();
     const submit = async e => {
@@ -21,15 +24,19 @@ const ProfileDetails = () => {
             const data = (await authenticationInstance.post('accounts:update', {
                 idToken: auth.token,
                 email: email,
+                password: password,
                 returnSecureToken: true,
             })).data;
             setAuth({
                 email: data.email,
                 token: data.idToken,
                 userId: data.localId,
-            })
+            });
+            setChangeDateErrors(null);
+            setChangeDateSuccess(true);
+            setTimeout(() => setChangeDateSuccess(false), 3000);
         } catch (e) {
-            console.log(e.response);
+            setChangeDateErrors(firebaseErrorsHandler(e.response));
         }
         setLoading(false);
     };
@@ -48,6 +55,10 @@ const ProfileDetails = () => {
 
     return (
         <div>
+            {changeDateSuccess ? <div className="alert alert-success">
+                Zmiana danych logowania zakończyła się sukcesem.
+            </div> : null}
+            {changeDateErrors ? <div className="alert alert-danger">{changeDateErrors}</div> : null}
             <h2>Logowanie:</h2>
 
             <form onSubmit={submit}>

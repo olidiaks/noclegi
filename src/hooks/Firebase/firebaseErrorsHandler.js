@@ -10,6 +10,8 @@ export function firebaseErrorsHandler(response) {
             return "Nie poprawne hasło.";
         case "MISSING_PASSWORD":
             return "Nie podano hasła.";
+        case "CREDENTIAL_TOO_OLD_LOGIN_AGAIN":
+            return "Dane logowania są za stare, musisz się prze logować."
         default:
             return response.data.error.message;
     }
