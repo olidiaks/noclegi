@@ -9,8 +9,11 @@ import {useNavigate} from "react-router-dom";
 import {submit} from "../helpers/submit";
 import {firebaseErrorsHandler} from "../../../hooks/Firebase/firebaseErrorsHandler";
 import authContext from "../../../context/authContext";
+import useWebsiteTitle from "../../../hooks/useWebsiteTitle";
 
 export default function Register() {
+    useWebsiteTitle("Rejestracja | Noclegi");
+
     const theme = useContext(ThemeContext).color;
 
     const [email, setEmail] = useState({

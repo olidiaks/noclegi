@@ -5,13 +5,14 @@ import isStrongPassword from "validator/es/lib/isStrongPassword";
 import useAuth from "../../../hooks/useAuth";
 import {authenticationInstance} from "../../../axios";
 import {firebaseErrorsHandler} from "../../../hooks/Firebase/firebaseErrorsHandler";
+import useWebsiteTitle from "../../../hooks/useWebsiteTitle";
 
 const ProfileDetails = () => {
+    useWebsiteTitle("Szczegóły profilu | Noclegi");
     const [errors, setErrors] = useState({
         email: true,
         password: false,
     });
-
     const [changeDateSuccess, setChangeDateSuccess] = useState(false);
     const [changeDateErrors, setChangeDateErrors] = useState(null);
     const [loading, setLoading] = useState(false);

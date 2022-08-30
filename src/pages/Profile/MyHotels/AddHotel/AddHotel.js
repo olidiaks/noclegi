@@ -6,9 +6,15 @@ import {inputChangeHandler} from "../../../../components/forms/Inputs/InputHelpe
 import {
     checkValidationForTrackedInputs
 } from "../../../../components/forms/Inputs/InputHelpers/checkValidationForTrackedInputs";
+import instance from "../../../../axios";
+import {useNavigate} from "react-router-dom";
+import useWebsiteTitle from "../../../../hooks/useWebsiteTitle";
+import useAuth from "../../../../hooks/useAuth";
 
 
 const AddHotel = () => {
+    const [auth] = useAuth();
+    useWebsiteTitle("Dodawanie hoteli | Noclegi.")
     const theme = useContext(themeContext).color;
 
     const [name, setName] = useState({
@@ -40,14 +46,29 @@ const AddHotel = () => {
         setIsEverythingValid(checkValidationForTrackedInputs(trackValues));
     }, trackValues);
 
-    const submit = event => {
+    const navigate = useNavigate();
+    const submit = async event => {
         event.preventDefault();
         setLoading(true);
-        setTimeout(() => {
-            setLoading(false);
-            setAddSuccess(true);
-            setTimeout(() => setAddSuccess(false), 3000);
-        }, 500);
+        try {
+            await instance.post('/hotels.json', {
+                name: name.value,
+                city: city.value,
+                rooms: rooms.value,
+                description: description.value,
+                status: status.value,
+                features: features.value,
+                idUser: auth.userId,
+            });
+            navigate("/profil/mojeHotele", {replace: false});
+        } catch (e) {
+            console.log(e.response)
+        }
+
+        setLoading(false);
+        setAddSuccess(true);
+        setTimeout(() => setAddSuccess(false), 3000);
+
     }
 
 

@@ -4,8 +4,10 @@ import AuthContext from "../../../context/authContext";
 import LoadingButton from "../../UI/LoadingButton/LoadingButton";
 import {firebaseErrorsHandler} from "../../../hooks/Firebase/firebaseErrorsHandler";
 import {submit} from "../helpers/submit";
+import useWebsiteTitle from "../../../hooks/useWebsiteTitle";
 
 const Login = () => {
+    useWebsiteTitle("Logowanie | Noclegi");
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 

@@ -1,6 +1,9 @@
 import {Link, useResolvedPath} from "react-router-dom";
+import useWebsiteTitle from "../../../hooks/useWebsiteTitle";
 
 const MyHotels = () => {
+    useWebsiteTitle("Moje hotele. | Noclegi");
+
     const path = useResolvedPath('dodaj-nowy-hotel');
 
     return <div>
