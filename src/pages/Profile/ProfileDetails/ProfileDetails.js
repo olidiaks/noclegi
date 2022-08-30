@@ -2,6 +2,8 @@ import LoadingButton from "../../../components/UI/LoadingButton/LoadingButton";
 import {useEffect, useState} from "react";
 import isEmail from "validator/es/lib/isEmail";
 import isStrongPassword from "validator/es/lib/isStrongPassword";
+import useAuth from "../../../hooks/useAuth";
+import {authenticationInstance} from "../../../axios";
 
 const ProfileDetails = () => {
     const [errors, setErrors] = useState({
@@ -10,17 +12,29 @@ const ProfileDetails = () => {
     });
 
     const [loading, setLoading] = useState(false);
-
-    const submit = e => {
+    const [auth, setAuth] = useAuth();
+    const submit = async e => {
         e.preventDefault();
         setLoading(true);
-        setTimeout(() => {
-            setLoading(false);
-        }, 500);
 
+        try {
+            const data = (await authenticationInstance.post('accounts:update', {
+                idToken: auth.token,
+                email: email,
+                returnSecureToken: true,
+            })).data;
+            setAuth({
+                email: data.email,
+                token: data.idToken,
+                userId: data.localId,
+            })
+        } catch (e) {
+            console.log(e.response);
+        }
+        setLoading(false);
     };
 
-    const [email, setEmail] = useState('przykładowy@email.pl');
+    const [email, setEmail] = useState(auth.email);
     useEffect(() => {
         setErrors({...errors, email: isEmail(email)});
     }, [email]);

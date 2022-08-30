@@ -1,6 +1,6 @@
 import style from './InspiringQuote.module.css';
 import {useEffect, useLayoutEffect, useState} from "react";
-import random from "../../misic/Random";
+import random from "../../helpers/Random";
 
 const quotes = [
     'Ze wszystkich książek na świecie najlepsze historie można znaleźć na stronach paszportu.',

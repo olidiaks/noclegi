@@ -8,10 +8,9 @@ import {submit} from "../helpers/submit";
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const validator = () => true;
 
     const {login} = useContext(AuthContext);
-    const path = useLocation().state.path;
+    const path = useLocation().state.path ?? "/";
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
 
@@ -21,11 +20,11 @@ const Login = () => {
     const errorHandler = (response) => {
         setValid(false);
         setPassword('');
-        setError(firebaseErrorsHandler(response))
+        setError(firebaseErrorsHandler(response));
     };
 
     const submitHandler = e =>
-        submit(e, setLoading, email, password, path, navigate, errorHandler, login, true);
+        submit(e, setLoading, email, password, path == "/zaloguj" ? "/" : path, navigate, errorHandler, login, 'accounts:signInWithPassword');
 
     return (
         <div>

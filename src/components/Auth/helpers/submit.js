@@ -1,12 +1,12 @@
 import {authenticationInstance} from "../../../axios";
 import {loginHandler} from "./loginHandler";
 
-export async function submit(event, setLoading, email, password, path, navigate, errorHandler, login, isSingIn) {
+export async function submit(event, setLoading, email, password, path, navigate, errorHandler, login, url) {
     event.preventDefault();
     setLoading(true);
 
     try {
-        const res = await authenticationInstance(isSingIn).post(null, {
+        const res = await authenticationInstance.post(url, {
             email: email,
             password: password,
             returnSecureToken: true,

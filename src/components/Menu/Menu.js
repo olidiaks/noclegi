@@ -8,7 +8,7 @@ function Menu() {
 
     const logout = (e) => {
         e.preventDefault();
-        setAuth(false);
+        setAuth(null);
     }
 
     const actualPath = useLocation().pathname;

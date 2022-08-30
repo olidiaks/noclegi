@@ -49,7 +49,7 @@ export default function Register() {
     const {login} = useContext(authContext);
 
     const submitHandler = event =>
-        submit(event, setLoading, email.value, password.value, '/', navigate, errorHandler, login, false);
+        submit(event, setLoading, email.value, password.value, '/', navigate, errorHandler, login, 'accounts:signUp');
 
     const [error, setError] = useState('');
 
