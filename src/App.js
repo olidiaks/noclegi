@@ -20,6 +20,7 @@ import ErrorBoundary from "./hoc/ErrorBoundary";
 import Register from "./components/Auth/Register/Register";
 import NotFound from "./components/404/404";
 
+const EditHotels = lazy(() => import ( "./pages/Profile/MyHotels/EditHotels/EditHotels"));
 const AddHotel = lazy(() => import("./pages/Profile/MyHotels/AddHotel/AddHotel"));
 const MyHotels = lazy(() => import("./pages/Profile/MyHotels/MyHotels"));
 const ProfileDetails = lazy(() => import("./pages/Profile/ProfileDetails/ProfileDetails"));
@@ -77,10 +78,19 @@ function App() {
                 <Route path="/wyszukaj/:term" element={<Search/>}/>
                 <Route
                     path="/profil/mojeHotele/dodaj-nowy-hotel"
-                    element={<AuthenticatedRoute
-                        path="/profil/mojeHotele/dodaj-nowy-hotel"><AddHotel/></AuthenticatedRoute>}
-                >
-                </Route>
+                    element={
+                        <AuthenticatedRoute path="/profil/mojeHotele/dodaj-nowy-hotel">
+                            <AddHotel/>
+                        </AuthenticatedRoute>
+                    }
+                />
+                <Route
+                    path="/profil/hotele/edytuj/:id"
+                    element={
+                        <AuthenticatedRoute path="/profil/hotele/edytuj/:id">
+                            <EditHotels/>
+                        </AuthenticatedRoute>
+                    }/>
                 <Route path='/profil/*' element={<AuthenticatedRoute path="/profil"/>}>
                     <Route element={<Profile/>}>
                         <Route path="szczegoly" element={<ProfileDetails/>}/>
