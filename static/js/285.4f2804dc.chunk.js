@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunknoclegi=self.webpackChunknoclegi||[]).push([[285],{9285:function(e,n,o){o.r(n);var l=o(6871),c=o(3504),t=o(1364),a=o(184);n.default=function(){(0,t.Z)("Moje hotele. | Noclegi");var e=(0,l.WU)("dodaj-nowy-hotel");return(0,a.jsxs)("div",{children:[(0,a.jsx)("p",{children:"Nie ma jeszcze \u017cadnego hotelu."}),(0,a.jsx)(c.rU,{to:e,className:"btn btn-primary",children:"Dodaj hotel"})]})}}}]);
+//# sourceMappingURL=285.4f2804dc.chunk.js.map
