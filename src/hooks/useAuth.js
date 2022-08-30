@@ -9,8 +9,8 @@ function useAuth() {
 
     const setAuth = (user) => {
         if (user) {
-            authContext.login();
             window.localStorage.setItem('token-data', JSON.stringify(user));
+            authContext.login();
         } else {
             authContext.logout();
         }
