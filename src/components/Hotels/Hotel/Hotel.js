@@ -60,7 +60,7 @@ function Hotel(props) {
                         </p>
                         {auth ? <p className="mt-2">Dostępność {props.rooms} pokoje.</p> :
                             <LoginButton>Dostępność: zaloguj się.</LoginButton>
-                        }https://placeimg.com/220/18${random(0, 10)}/arch
+                        }
                     </div>
                 </div>
 
