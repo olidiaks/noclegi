@@ -2,7 +2,10 @@ import PropTypes from "prop-types";
 
 const propTypes = {
     description: PropTypes.string,
-    value: PropTypes.string.isRequired,
+    value: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number,
+    ]).isRequired,
     onChange: PropTypes.func.isRequired,
     option: PropTypes.array.isRequired,
 };

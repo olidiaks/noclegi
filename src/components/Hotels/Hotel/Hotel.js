@@ -29,20 +29,20 @@ function Hotel(props) {
             <div className="card-body">
 
                 <div className="row">
-                    <div className="col-4">
+                    <div className="col-12 col-md-4">
                         <img
-                            src={`https://placeimg.com/220/18${random(0, 10)}/arch`}
-                            alt=""
+                            src={`https://placeimg.com/220/18${random(0, 9)}/arch`}
+                            alt="Zdjęcie hotelu."
                             className="img-fluid img-thumbnail"/>
                     </div>
-                    <div className="col-8">
+                    <div className="col-12 col-md-8">
                         <div className="row">
                             <div className="col">
                                 <p className={styles.title}>{props.name}</p>
                                 <span className="badge badge-light">{props.city}</span>
                             </div>
-                            <div className="col text-end">
-                                <h5>Ocena: {props.rating ?? 0}</h5>
+                            <div className="col text-start text-md-end">
+                                <h5>Ocena: {props.rating ?? "brak ocen"}</h5>
                                 <Link
                                     to={`/hotele/${props.id}`}
                                     className={`btn btn-${theme.color} mt-2 px-4`}
@@ -60,7 +60,7 @@ function Hotel(props) {
                         </p>
                         {auth ? <p className="mt-2">Dostępność {props.rooms} pokoje.</p> :
                             <LoginButton>Dostępność: zaloguj się.</LoginButton>
-                        }
+                        }https://placeimg.com/220/18${random(0, 10)}/arch
                     </div>
                 </div>
 

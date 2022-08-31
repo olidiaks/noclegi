@@ -5,10 +5,11 @@ const instance = axios.create({
 
 });
 
+
 export const authenticationInstance = axios.create({
     baseURL: 'https://identitytoolkit.googleapis.com/v1',
     params: {
-        key: 'AIzaSyAiyIunKuby59uyS9k2Q3vlUFHLNYDeqfQ'
+        key: 'AIzaSyAiyIunKuby59uyS9k2Q3vlUFHLNYDeqfQ',
     }
 })
 

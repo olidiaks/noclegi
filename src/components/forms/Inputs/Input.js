@@ -10,7 +10,8 @@ const propTypes = {
     description: PropTypes.string,
     value: PropTypes.oneOfType([
         PropTypes.string,
-        PropTypes.array
+        PropTypes.array,
+        PropTypes.number,
     ]),
     onChange: PropTypes.func.isRequired,
     type: PropTypes.string.isRequired,

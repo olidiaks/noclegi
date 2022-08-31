@@ -5,7 +5,7 @@ const propTypes = {
     name: PropTypes.string.isRequired,
     city: PropTypes.string.isRequired,
     onRemove: PropTypes.func.isRequired,
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
 };
 const LastHotel = props =>
     <div className="card bg-light text-black my-2">

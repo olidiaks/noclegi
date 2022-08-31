@@ -9,6 +9,7 @@ import {
 } from "../../../../components/forms/Inputs/InputHelpers/checkValidationForTrackedInputs";
 import {useNavigate} from "react-router-dom";
 import useAuth from "../../../../hooks/useAuth";
+import {firebaseErrorsHandler} from "../../../../hooks/Firebase/firebaseErrorsHandler";
 
 const propTypes = {
     title: string.isRequired,
@@ -67,6 +68,7 @@ function HotelForm(props) {
         setIsEverythingValid(checkValidationForTrackedInputs(trackValues));
     }, trackValues);
 
+    const [error, setError] = useState(null);
     const navigate = useNavigate();
     const [auth] = useAuth();
     const submit = async event => {
@@ -84,8 +86,7 @@ function HotelForm(props) {
             });
             navigate("/profil/mojeHotele", {replace: false});
         } catch (e) {
-            console.log(e.response);
-            throw new Error(e.response);
+            setError(firebaseErrorsHandler(e.response));
         }
 
         setLoading(false);
@@ -96,6 +97,7 @@ function HotelForm(props) {
 
     return (
         <>
+            {error ? <div className="alert alert-danger">{error}</div> : null}
             {addSuccess ? <div className="alert alert-success">
                 <p>Pomyślnie dodano nowy hotel.</p>
             </div> : null}

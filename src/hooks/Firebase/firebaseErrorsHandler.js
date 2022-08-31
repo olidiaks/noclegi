@@ -12,6 +12,8 @@ export function firebaseErrorsHandler(response) {
             return "Nie podano hasła.";
         case "CREDENTIAL_TOO_OLD_LOGIN_AGAIN":
             return "Dane logowania są za stare, musisz się prze logować."
+        case "Unauthorized":
+            return "Sesja wygasła nie można autoryzować zapytania do bazy danych. Należy się prze logować.";
         default:
             return response.data.error.message;
     }
