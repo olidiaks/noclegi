@@ -1,4 +1,6 @@
-import isEmail from "validator/es/lib/isEmail";
+function isEmail(value) {
+    return value.includes('@');
+}
 
 const availableRules = {
     required(value) {
