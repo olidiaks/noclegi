@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/noclegi/static/css/main.c4bcb7b8.css",
-    "main.js": "/noclegi/static/js/main.846a4080.js",
+    "main.js": "/noclegi/static/js/main.2f62b4de.js",
     "static/js/245.e1d3fc8a.chunk.js": "/noclegi/static/js/245.e1d3fc8a.chunk.js",
     "static/js/974.2565e309.chunk.js": "/noclegi/static/js/974.2565e309.chunk.js",
     "static/js/285.df6d64f0.chunk.js": "/noclegi/static/js/285.df6d64f0.chunk.js",
@@ -11,7 +11,7 @@
     "static/media/header.jpg": "/noclegi/static/media/header.ae20f401724556d4760e.jpg",
     "index.html": "/noclegi/index.html",
     "main.c4bcb7b8.css.map": "/noclegi/static/css/main.c4bcb7b8.css.map",
-    "main.846a4080.js.map": "/noclegi/static/js/main.846a4080.js.map",
+    "main.2f62b4de.js.map": "/noclegi/static/js/main.2f62b4de.js.map",
     "245.e1d3fc8a.chunk.js.map": "/noclegi/static/js/245.e1d3fc8a.chunk.js.map",
     "974.2565e309.chunk.js.map": "/noclegi/static/js/974.2565e309.chunk.js.map",
     "285.df6d64f0.chunk.js.map": "/noclegi/static/js/285.df6d64f0.chunk.js.map",
@@ -21,6 +21,6 @@
   },
   "entrypoints": [
     "static/css/main.c4bcb7b8.css",
-    "static/js/main.846a4080.js"
+    "static/js/main.2f62b4de.js"
   ]
 }
