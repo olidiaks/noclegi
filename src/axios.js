@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-    baseURL: 'https://kurs-react-9a6f2-default-rtdb.firebaseio.com',
+    baseURL: process.env.REACT_APP_DATABASE,
 
 });
 
@@ -9,7 +9,7 @@ const instance = axios.create({
 export const authenticationInstance = axios.create({
     baseURL: 'https://identitytoolkit.googleapis.com/v1',
     params: {
-        key: 'AIzaSyAiyIunKuby59uyS9k2Q3vlUFHLNYDeqfQ',
+        key: process.env.REACT_APP_AUTHENTICATION_KEY,
     }
 })
 
