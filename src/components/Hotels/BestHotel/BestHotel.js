@@ -1,10 +1,11 @@
-import PropTypes from "prop-types";
+import PropTypes, {func} from "prop-types";
 import {useEffect, useState} from "react";
 import moment from "moment";
 import {Link} from "react-router-dom";
 
 const propTypes = {
     getBestHotel: PropTypes.func.isRequired,
+    unmountBestHotels: func.isRequired,
 };
 
 
@@ -18,8 +19,14 @@ const BestHotel = props => {
         const interval = setInterval(() => {
             const leftTime = -moment().diff(endTime) / 1000;
             const minute = Math.floor(leftTime / 60);
-            const seconds = Math.floor(leftTime % 60);
+            let seconds = Math.floor(leftTime % 60);
+            if (seconds < 10) {
+                seconds = '0' + seconds;
+            }
             setTime(`${minute}minut i ${seconds}sekund`);
+            if (leftTime == 0) {
+                props.unmountBestHotels();
+            }
         }, 1000);
 
         return () => clearInterval(interval);

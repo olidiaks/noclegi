@@ -26,6 +26,9 @@ const Home = props => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [hotels]);
 
+    const [mountBestHotels, setMountBestHotels] = useState(true);
+    const unmountBestHotels = () => setMountBestHotels(false);
+
     const openHotel = hotel => setLastHotel(hotel);
     const removeLastHotel = () => setLastHotel(null);
 
@@ -47,7 +50,8 @@ const Home = props => {
     return (
         <>
             {lastHotel ? <LastHotel onRemove={removeLastHotel} {...lastHotel}/> : null}
-            {getBestHotel() ? <BestHotel getBestHotel={getBestHotel}/> : null}
+            {getBestHotel && mountBestHotels ? <BestHotel unmountBestHotels={unmountBestHotels}
+                                                          getBestHotel={getBestHotel}/> : null}
             <Hotels onOpen={openHotel} hotels={hotels}/>
         </>
     );
