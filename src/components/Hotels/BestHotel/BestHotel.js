@@ -30,7 +30,7 @@ const BestHotel = props => {
         }, 1000);
 
         return () => clearInterval(interval);
-    }, []);
+    }, [endTime]);
 
 
     if (!null) {
