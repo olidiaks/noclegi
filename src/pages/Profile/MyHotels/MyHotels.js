@@ -23,7 +23,7 @@ const MyHotels = () => {
     }
     useEffect(() => {
         fetchHotel();
-    }, [])
+    }, [fetchHotel])
 
     async function deleteHandler(id) {
         try {
@@ -43,9 +43,9 @@ const MyHotels = () => {
                         <table className="table table-striped">
                             <thead>
                             <tr>
-                                <td>Nazwa</td>
-                                <td>Status</td>
-                                <td>Opcje</td>
+                                <th>Nazwa</th>
+                                <th>Status</th>
+                                <th>Opcje</th>
                             </tr>
                             </thead>
                             <tbody>
