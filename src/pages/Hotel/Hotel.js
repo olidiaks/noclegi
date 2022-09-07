@@ -38,7 +38,7 @@ const Hotel = props => {
     const [rating, setRating] = useState(3);
     const rateHotel = async () => {
         try {
-            await instance.put(`/hotels/${id}/rating.json?auth=${auth.token}`, rating);
+            await instance.put(`/hotels/${id}/rating.json`, rating);
             navigate('/', {replace: false});
         } catch (e) {
             console.log(e.response);
@@ -85,7 +85,7 @@ const Hotel = props => {
                                     <div className="row">
                                         <div className="col-8">
                                             <Input
-                                                onChange={e => setRating(e.value)}
+                                                onChange={e => setRating(e.target.value)}
                                                 value={rating}
                                                 type="select"
                                                 option={[
@@ -109,7 +109,6 @@ const Hotel = props => {
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     );
