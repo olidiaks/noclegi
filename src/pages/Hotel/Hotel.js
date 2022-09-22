@@ -85,7 +85,7 @@ const Hotel = props => {
                                     <div className="row">
                                         <div className="col-8">
                                             <Input
-                                                onChange={e => setRating(e.target.value)}
+                                                onChange={e => setRating(e.value)}
                                                 value={rating}
                                                 type="select"
                                                 option={[
