@@ -24,7 +24,7 @@ const BestHotel = props => {
                 seconds = '0' + seconds;
             }
             setTime(`${minute}minut i ${seconds}sekund`);
-            if (leftTime == 0) {
+            if (leftTime <= 0) {
                 props.unmountBestHotels();
             }
         }, 1000);
