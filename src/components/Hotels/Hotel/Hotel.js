@@ -31,7 +31,7 @@ function Hotel(props) {
                 <div className="row">
                     <div className="col-12 col-md-4">
                         <img
-                            src={`https://placeimg.com/220/18${random(0, 9)}/arch`}
+                            src={`https://placeimg.com/22${random(0, 9)}/18${random(0, 9)}/arch`}
                             alt="Zdjęcie hotelu."
                             className="img-fluid img-thumbnail"/>
                     </div>
