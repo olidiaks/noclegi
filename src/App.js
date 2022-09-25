@@ -9,7 +9,7 @@ import ThemeButton from './components/UI/ThemeButton/ThemeButton';
 import ThemeContext from './context/themeContext';
 import AuthContext from './context/authContext';
 import InspiringQuote from "./components/InsparingQuote/InspiringQuote";
-import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import {BrowserRouter as Router, Navigate, Route, Routes} from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Hotel from "./pages/Hotel/Hotel";
 import Search from "./pages/Search/Search";
@@ -67,6 +67,7 @@ function App() {
         <Suspense fallback={<LoadingIcon/>}>
             <Routes>
                 <Route path="*" element={<NotFound/>}/>
+                <Route path="/noclegi" element={<Navigate to="/"/>}/>
                 <Route path="/" element={
                     <Home
                         backendHotels={backendHotels}
