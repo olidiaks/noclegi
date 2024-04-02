@@ -53,7 +53,7 @@ const Hotel = props => {
                 <div className="row">
                     <div className="col-12 col-md-4">
                         <img
-                            src="https://placeimg.com/220/180/arch"
+                            src="https://picsum.photos/220/180"
                             alt=""
                             className="img-fluid img-thumbnail"/>
                     </div>
