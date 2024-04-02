@@ -79,7 +79,7 @@ const ProfileDetails = () => {
                             Niepoprawny email.
                         </div>
                         <div className="valid-feedback">
-                            Wszystko gra!
+                            Email spełnia wszystkie wymogi.
                         </div>
                     </div>
 
@@ -106,7 +106,7 @@ const ProfileDetails = () => {
                             </ul>
                         </div>
                         <div className="valid-feedback">
-                            Wszystko gra!
+                            Hasło spełnia wszystkie wymogi.
                         </div>
                     </div>
                 </div>
