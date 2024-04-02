@@ -5,7 +5,7 @@ const Footer = (props) => {
     const theme = useContext(ThemeContext);
     return (
         <div className={`text-center m-3 text-${theme.color}`}>
-            noclegi 2022
+            noclegi 2024
         </div>
     );
 }
