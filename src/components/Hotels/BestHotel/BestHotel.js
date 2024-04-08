@@ -1,7 +1,8 @@
-import PropTypes, {func} from "prop-types";
-import {useEffect, useState} from "react";
+import PropTypes, { func } from "prop-types";
+import { useContext, useEffect, useState } from "react";
 import moment from "moment";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import ThemeContext from "../../../context/themeContext";
 
 const propTypes = {
     getBestHotel: PropTypes.func.isRequired,
@@ -10,6 +11,7 @@ const propTypes = {
 
 
 const BestHotel = props => {
+    const theme = useContext(ThemeContext).color;
     const endTime = moment()
         .add(Math.floor(Math.random() * 60), 'minutes')
         .add(Math.floor(Math.random() * 60), 'seconds');
@@ -42,9 +44,8 @@ const BestHotel = props => {
                     <p className="no-wrap">Ocena: {hotel.rating}</p>
                 </div>
                 <p>Do końca oferty pozostało: {time}</p>
-                <Link to={`/hotele/${hotel.id}`} className="btn btn-sm btn-light">Pokaż</Link>
+                <Link to={`/hotele/${hotel.id}`} className={`btn btn-sm btn-${theme}`}>Pokaż</Link>
             </div>
-
         </div>
     )
 }
