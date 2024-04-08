@@ -55,7 +55,7 @@ function Hotel(props) {
                     </div>
 
                     <div className="col-12">
-                        <p className={styles.description}>
+                        <p className={`${styles.description} text-truncate`}>
                             {props.description}
                         </p>
                         {auth ? <p className="mt-2">Dostępność {props.rooms} pokoje.</p> :
