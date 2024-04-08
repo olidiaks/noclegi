@@ -39,7 +39,7 @@ function Hotel(props) {
                         <div className="row">
                             <div className="col">
                                 <p className={styles.title}>{props.name}</p>
-                                <span className="badge badge-light">{props.city}</span>
+                                <span className={`badge badge-light ${styles.city}`}>{props.city}</span>
                             </div>
                             <div className="col text-start text-md-end">
                                 <h5>Ocena: {props.rating ?? "brak ocen"}</h5>

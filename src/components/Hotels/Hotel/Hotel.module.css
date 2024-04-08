@@ -2,11 +2,17 @@
   margin-bottom: 20px;
   background-color: rgb(236 236 236);
 }
+
 .title {
   font-weight: bold;
   font-size: 1.2rem;
   margin-bottom: 0;
 }
+
+.city {
+  font-size: 0.75rem;
+}
+
 .description {
   color: grey;
   margin-top: 10px;
